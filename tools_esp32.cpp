@@ -1,6 +1,7 @@
 #include "../_config/_config.h"
 #if COMPONENT_TOOLS_ESP32
 #include "tools_esp32.h"
+#include "esp_mac.h"
 
 namespace tools_esp32 {
 
@@ -31,6 +32,12 @@ void fcpu_cmd(int argc, char * argv[]) {
 	uint32_t fcpu_hz;
 	esp_clk_tree_src_get_freq_hz(SOC_MOD_CLK_CPU, ESP_CLK_TREE_SRC_FREQ_PRECISION_CACHED, &fcpu_hz);
 	printf("%lu MHz\n", fcpu_hz / 1000000);
+}
+
+void serial_number_cmd(int argc, char * argv[]) {
+	uint8_t sn[6] = {0};
+	esp_read_mac(sn, ESP_MAC_WIFI_STA);
+	printf("%02X:%02X:%02X:%02X:%02X:%02X\n", sn[0], sn[1], sn[2], sn[3], sn[4], sn[5]);
 }
 
 }

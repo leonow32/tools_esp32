@@ -37,7 +37,7 @@ void fcpu_cmd(int argc, char * argv[]) {
 void serial_number_cmd(int argc, char * argv[]) {
 	uint8_t sn[6] = {0};
 	esp_read_mac(sn, ESP_MAC_WIFI_STA);
-	printf("%02X:%02X:%02X:%02X:%02X:%02X\n", sn[0], sn[1], sn[2], sn[3], sn[4], sn[5]);
+	print_hexstr(sn, sizeof(sn), true), ' ';
 }
 
 }
